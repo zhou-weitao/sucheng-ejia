@@ -1,0 +1,228 @@
+/* ============================================
+   苏城e教 - 设计系统 Design Tokens v1.0
+   ============================================ */
+
+/* 🔷 颜色系统 - 统一变量 */
+page {
+  /* 品牌色 */
+  --color-primary: #667eea;
+  --color-primary-light: #8a9fff;
+  --color-primary-dark: #5a67d8;
+  --color-secondary: #764ba2;
+  --color-gradient: linear-gradient(135deg, #667eea, #764ba2);
+
+  /* 功能色 */
+  --color-success: #10b981;
+  --color-success-bg: rgba(16, 185, 129, 0.1);
+  --color-warning: #f59e0b;
+  --color-warning-bg: rgba(245, 158, 11, 0.1);
+  --color-error: #ef4444;
+  --color-error-bg: rgba(239, 68, 68, 0.1);
+
+  /* 中性色 */
+  --color-gray-900: #1a202c;
+  --color-gray-700: #4a5568;
+  --color-gray-500: #9ca3af;
+  --color-gray-300: #e2e8f0;
+  --color-gray-100: #f7f8fc;
+  --color-white: #ffffff;
+
+  /* 金色（评分专用） */
+  --color-gold: #ffd700;
+  --color-gold-light: #fff8e1;
+
+  /* 背景 */
+  --bg-primary: #f5f7fa;
+  --bg-card: #ffffff;
+
+  /* 间距系统 */
+  --space-xs: 8rpx;
+  --space-sm: 16rpx;
+  --space-md: 24rpx;
+  --space-lg: 32rpx;
+  --space-xl: 40rpx;
+
+  /* 圆角系统 */
+  --radius-sm: 8rpx;
+  --radius-md: 16rpx;
+  --radius-lg: 20rpx;
+  --radius-xl: 24rpx;
+  --radius-full: 999rpx;
+
+  /* 阴影系统 */
+  --shadow-sm: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4rpx 24rpx rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 8rpx 30rpx rgba(0, 0, 0, 0.08);
+  --shadow-primary: 0 10rpx 30rpx rgba(102, 126, 234, 0.35);
+
+  /* 全局样式 */
+  background: var(--bg-primary);
+  font-size: 28rpx;
+  line-height: 1.6;
+  color: var(--color-gray-900);
+  padding-bottom: 120rpx;
+  box-sizing: border-box;
+}
+
+/* ============================================
+   基础组件
+   ============================================ */
+
+.container {
+  padding: var(--space-md);
+  box-sizing: border-box;
+}
+
+/* 🔘 按钮系统 */
+.btn-primary {
+  background: var(--color-gradient);
+  color: var(--color-white);
+  border-radius: var(--radius-full);
+  padding: 28rpx 0;
+  font-size: 32rpx;
+  font-weight: 600;
+  letter-spacing: 2rpx;
+  box-shadow: var(--shadow-primary);
+  transition: all 0.2s ease;
+}
+
+.btn-primary:active {
+  opacity: 0.9;
+  transform: translateY(2rpx);
+  box-shadow: 0 6rpx 20rpx rgba(102, 126, 234, 0.4);
+}
+
+.btn-primary[disabled] {
+  opacity: 0.5;
+  box-shadow: none;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--color-primary);
+  border: 2rpx solid var(--color-primary);
+  border-radius: var(--radius-full);
+  padding: 20rpx 40rpx;
+  font-size: 28rpx;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-ghost:active {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+/* 🃏 卡片系统 */
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-md);
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+/* 🏷️ 标签系统 */
+.tag {
+  display: inline-block;
+  background: rgba(102, 126, 234, 0.1);
+  color: var(--color-primary);
+  font-size: 22rpx;
+  font-weight: 500;
+  padding: 8rpx 20rpx;
+  border-radius: var(--radius-full);
+  margin-right: 12rpx;
+  margin-bottom: 8rpx;
+}
+
+.tag-success {
+  background: var(--color-success-bg);
+  color: var(--color-success);
+}
+
+.tag-warning {
+  background: var(--color-warning-bg);
+  color: var(--color-warning);
+}
+
+.tag-error {
+  background: var(--color-error-bg);
+  color: var(--color-error);
+}
+
+/* ⭐ 星级评分 */
+.stars {
+  color: var(--color-gold);
+  font-size: 28rpx;
+  letter-spacing: 2rpx;
+}
+
+/* 📝 标题系统 */
+.section-title {
+  display: block;
+  font-size: 32rpx;
+  font-weight: 700;
+  color: var(--color-gray-900);
+  margin-bottom: var(--space-md);
+  letter-spacing: 1rpx;
+}
+
+/* ➖ 分割线 */
+.divider {
+  height: 1rpx;
+  background: var(--color-gray-300);
+  margin: var(--space-md) 0;
+}
+
+/* ✅ 状态徽章 */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 8rpx 20rpx;
+  border-radius: var(--radius-full);
+  font-size: 24rpx;
+  font-weight: 500;
+}
+
+.status-badge.pending {
+  background: var(--color-warning-bg);
+  color: var(--color-warning);
+}
+
+.status-badge.success {
+  background: var(--color-success-bg);
+  color: var(--color-success);
+}
+
+.status-badge.error {
+  background: var(--color-error-bg);
+  color: var(--color-error);
+}
+
+/* ============================================
+   常用工具类
+   ============================================ */
+
+.text-primary { color: var(--color-primary); }
+.text-gray { color: var(--color-gray-500); }
+.text-success { color: var(--color-success); }
+.text-warning { color: var(--color-warning); }
+.text-error { color: var(--color-error); }
+
+.flex { display: flex; }
+.flex-center { display: flex; align-items: center; justify-content: center; }
+.flex-between { display: flex; align-items: center; justify-content: space-between; }
+.flex-col { display: flex; flex-direction: column; }
+
+.mb-sm { margin-bottom: var(--space-sm); }
+.mb-md { margin-bottom: var(--space-md); }
+.mb-lg { margin-bottom: var(--space-lg); }
+
+.mt-sm { margin-top: var(--space-sm); }
+.mt-md { margin-top: var(--space-md); }
+.mt-lg { margin-top: var(--space-lg); }

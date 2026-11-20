@@ -1,0 +1,90 @@
+<view class="container">
+  <!-- 顶部用户信息 -->
+  <view class="user-header">
+    <view class="avatar">{{userInfo.nickName ? userInfo.nickName[0] : '?'}}</view>
+    <view class="user-info">
+      <text class="nickname">{{userInfo.nickName || '用户'}}</text>
+      <view class="role-badge" wx:if="{{userRole === 'tutor'}}">🎓 老师</view>
+      <view class="role-badge parent" wx:elif="{{userRole === 'parent'}}">👨‍👩‍👧 家长</view>
+      <view class="role-badge" wx:else>👤 待选择</view>
+    </view>
+    <view class="member-tag" wx:if="{{isMember}}">
+      <text class="vip">VIP</text>
+      <text class="vip-text">会员</text>
+    </view>
+  </view>
+
+  <!-- 数据统计 -->
+  <view class="stats-card">
+    <view class="stat-item">
+      <text class="stat-num">{{stats.views || 0}}</text>
+      <text class="stat-label">被查看</text>
+    </view>
+    <view class="stat-divider"></view>
+    <view class="stat-item">
+      <text class="stat-num">{{stats.likes || 0}}</text>
+      <text class="stat-label">获赞</text>
+    </view>
+    <view class="stat-divider"></view>
+    <view class="stat-item">
+      <text class="stat-num">{{stats.orders || 0}}</text>
+      <text class="stat-label">接单</text>
+    </view>
+  </view>
+
+  <!-- 功能入口 -->
+  <view class="menu-card">
+    <view class="menu-item" bindtap="goMyPublish">
+      <view class="menu-icon blue">📝</view>
+      <view class="menu-content">
+        <text class="menu-title">我的发布</text>
+        <text class="menu-desc">查看你发布的需求</text>
+      </view>
+      <text class="menu-arrow">›</text>
+    </view>
+
+    <view class="menu-item" bindtap="goOrders">
+      <view class="menu-icon green">💰</view>
+      <view class="menu-content">
+        <text class="menu-title">我的订单</text>
+        <text class="menu-desc">查看订单状态</text>
+      </view>
+      <text class="menu-arrow">›</text>
+    </view>
+
+    <view class="menu-item" bindtap="goMember">
+      <view class="menu-icon purple">👑</view>
+      <view class="menu-content">
+        <text class="menu-title">会员中心</text>
+        <text class="menu-desc" wx:if="{{isMember}}">{{memberExpire}}到期</text>
+        <text class="menu-desc" wx:else>开通会员解锁更多权益</text>
+      </view>
+      <text class="menu-arrow">›</text>
+    </view>
+
+    <view class="menu-item" bindtap="goToReviews">
+      <view class="menu-icon cyan">💬</view>
+      <view class="menu-content">
+        <text class="menu-title">我的评价</text>
+        <text class="menu-desc">查看收到的评价</text>
+      </view>
+      <text class="menu-arrow">›</text>
+    </view>
+
+    <view class="menu-item" bindtap="goToVerification">
+      <view class="menu-icon orange">🪪</view>
+      <view class="menu-content">
+        <text class="menu-title">认证中心</text>
+        <text class="menu-desc" wx:if="{{isVerified}}">已完成实名认证</text>
+        <text class="menu-desc" wx:else>完成认证获得更多曝光</text>
+      </view>
+      <text class="menu-badge" wx:if="{{!isVerified}}">去认证</text>
+      <text class="menu-arrow">›</text>
+    </view>
+  </view>
+
+  <!-- 退出按钮 -->
+  <view class="logout-wrap">
+    <button class="logout-btn" bindtap="onLogout">退出登录</button>
+  </view>
+</view>

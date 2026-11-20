@@ -1,0 +1,9 @@
+{
+  "name": "publishRequirement",
+  "version": "1.0.0",
+  "description": "家长发布家教需求云函数",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

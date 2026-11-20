@@ -1,0 +1,51 @@
+<view class="container">
+  <!-- 头部 -->
+  <view class="header">
+    <text class="title">{{userRole === 'parent' ? '我的需求' : '我的简历'}}</text>
+    <text class="subtitle">共 {{list.length}} 条记录</text>
+  </view>
+
+  <!-- 列表 -->
+  <view class="list-wrap" wx:if="{{!loading && !empty}}">
+    <view class="list-item" wx:for="{{list}}" wx:key="_id">
+      <view class="item-header">
+        <view class="item-title">{{userRole === 'parent' ? item.childGrade + ' · ' + item.subjects.join('、') : item.name + ' · ' + item.school}}</view>
+        <view class="item-status {{getStatusClass(item.status)}}">{{getStatusText(item.status)}}</view>
+      </view>
+
+      <view class="item-content">
+        <view class="item-row" wx:if="{{item.budget || item.expectedSalary}}">
+          <text class="label">预算：</text>
+          <text class="price">¥{{item.budget || item.expectedSalary}} /小时</text>
+        </view>
+        <view class="item-row">
+          <text class="label">区域：</text>
+          <text class="value">{{item.district}}</text>
+        </view>
+        <view class="item-desc" wx:if="{{item.description || item.intro}}">
+          {{item.description || item.intro}}
+        </view>
+      </view>
+
+      <view class="item-footer">
+        <view class="item-time">刚刚</view>
+        <view class="item-actions">
+          <button class="action-btn detail-btn" bindtap="goDetail" data-item="{{item}}">查看详情</button>
+          <button class="action-btn delete-btn" bindtap="onDelete" data-item="{{item}}">删除</button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-wrap" wx:if="{{!loading && empty}}">
+    <view class="empty-icon">📝</view>
+    <text class="empty-text">暂无发布记录</text>
+    <button class="publish-btn" bindtap="onPublish">去发布</button>
+  </view>
+
+  <!-- 加载中 -->
+  <view class="loading" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+</view>

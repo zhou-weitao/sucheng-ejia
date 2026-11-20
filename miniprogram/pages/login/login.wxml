@@ -1,0 +1,16 @@
+<view class="login-page">
+  <view class="logo-box">
+    <view class="logo">苏</view>
+    <text class="title">苏城e教</text>
+    <text class="subtitle">家教智能匹配平台</text>
+  </view>
+
+  <view class="btn-box">
+    <button class="login-btn" open-type="getUserInfo" bindgetuserinfo="onLogin">
+      微信登录
+    </button>
+    <view class="init-btn" bindtap="onInitData">
+      <text>初始化演示数据</text>
+    </view>
+  </view>
+</view>

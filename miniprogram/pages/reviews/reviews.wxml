@@ -1,0 +1,81 @@
+<view class="container">
+  <!-- 头部 -->
+  <view class="header">
+    <view class="header-top">
+      <view class="back-btn" bindtap="goBack">
+        <text class="back-icon">‹</text>
+      </view>
+      <text class="title">用户评价</text>
+      <view class="placeholder"></view>
+    </view>
+    
+    <view class="rating-summary" wx:if="{{!loading}}">
+      <view class="rating-left">
+        <text class="rating-number">{{averageRating.toFixed(1)}}</text>
+        <view class="rating-stars">
+          <text class="star {{item}}" wx:for="{{getStarArray(averageRating)}}" wx:key="index">★</text>
+        </view>
+        <text class="rating-count">共 {{totalReviews}} 条评价</text>
+      </view>
+      <view class="rating-right">
+        <view class="rating-bar" wx:for="{{[5,4,3,2,1]}}" wx:key="index">
+          <text class="bar-label">{{item}}星</text>
+          <view class="bar-wrap">
+            <view class="bar-fill" style="width: {{ratingBarWidths[item]}}%"></view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 评价列表 -->
+  <view class="list-wrap" wx:if="{{!loading && !empty}}">
+    <view class="list-item" wx:for="{{list}}" wx:key="_id">
+      <view class="item-header">
+        <view class="reviewer-info">
+          <view class="avatar">
+            <text class="avatar-text">{{item.reviewerName ? item.reviewerName.charAt(0) : '用'}}</text>
+          </view>
+          <view class="reviewer-detail">
+            <text class="reviewer-name">{{item.reviewerName || '匿名用户'}}</text>
+            <view class="rating-stars-small">
+              <text class="star-small {{starItem}}" wx:for="{{item.starArray}}" wx:key="starIndex">★</text>
+            </view>
+          </view>
+        </view>
+        <text class="review-date">{{item.formattedDate}}</text>
+      </view>
+
+      <view class="item-tags" wx:if="{{item.tags && item.tags.length > 0}}">
+        <text class="tag" wx:for="{{item.tags}}" wx:key="tagIndex">{{item}}</text>
+      </view>
+
+      <view class="item-content">
+        <text class="content-text">{{item.content || '用户未填写评价内容'}}</text>
+      </view>
+
+      <view class="item-images" wx:if="{{item.images && item.images.length > 0}}">
+        <image class="review-image" wx:for="{{item.images}}" wx:key="imgIndex" src="{{item}}" mode="aspectFill"></image>
+      </view>
+    </view>
+
+    <view class="load-more" wx:if="{{hasMore}}">
+      <text>上拉加载更多</text>
+    </view>
+    <view class="no-more" wx:if="{{!hasMore && list.length > 0}}">
+      <text>没有更多评价了</text>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-wrap" wx:if="{{!loading && empty}}">
+    <view class="empty-icon">💬</view>
+    <text class="empty-text">暂无评价</text>
+    <text class="empty-desc">该用户还没有收到任何评价哦</text>
+  </view>
+
+  <!-- 加载中 -->
+  <view class="loading" wx:if="{{loading && !isRefreshing}}">
+    <text>加载中...</text>
+  </view>
+</view>

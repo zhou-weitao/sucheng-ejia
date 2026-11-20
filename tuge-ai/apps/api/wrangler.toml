@@ -1,0 +1,19 @@
+name = "tuge-ai-api"
+main = "src/index.ts"
+compatibility_date = "2023-10-01"
+
+# [site]
+# bucket = "../web/dist"
+
+[[kv_namespaces]]
+binding = "SESSIONS"
+id = "your-session-kv-id"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "tuge-ai-db"
+database_id = "your-d1-database-id"
+
+[vars]
+TURNSTILE_SITE_KEY = "0x4AAAAAAEiW2lUKcb74SjVQ"
+TURNSTILE_SECRET_KEY = "your-turnstile-secret-key"

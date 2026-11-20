@@ -1,0 +1,146 @@
+.container {
+  padding: 30rpx;
+  background: #f5f7fa;
+  min-height: 100vh;
+}
+
+.card {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 32rpx;
+  margin-bottom: 20rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  margin-bottom: 30rpx;
+  display: block;
+  color: #333;
+}
+
+.role-selector {
+  display: flex;
+}
+
+.role-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48rpx 20rpx;
+  border: 2rpx solid #e8e8e8;
+  border-radius: 20rpx;
+  margin: 0 12rpx;
+}
+
+.role-card:first-child {
+  margin-left: 0;
+}
+
+.role-card:last-child {
+  margin-right: 0;
+}
+
+.role-active {
+  border-color: #667eea;
+  background: #f0f2ff;
+}
+
+.role-emoji {
+  font-size: 72rpx;
+  margin-bottom: 20rpx;
+}
+
+.role-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  margin-bottom: 8rpx;
+  color: #333;
+}
+
+.role-active .role-name {
+  color: #667eea;
+  font-weight: 700;
+}
+
+.role-desc {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.form-item {
+  margin-bottom: 40rpx;
+}
+
+.form-label {
+  display: block;
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 20rpx;
+  font-weight: 600;
+}
+
+.form-input {
+  border: 2rpx solid #e8e8e8;
+  border-radius: 16rpx;
+  padding: 24rpx 28rpx;
+  font-size: 28rpx;
+  background: #f7f8fc;
+  color: #333;
+  width: 100%;
+  box-sizing: border-box;
+  line-height: 1.5;
+  min-height: 88rpx;
+}
+
+.form-picker {
+  border: 2rpx solid #e8e8e8;
+  border-radius: 16rpx;
+  padding: 24rpx 28rpx;
+  font-size: 28rpx;
+  background: #f7f8fc;
+  color: #333;
+  line-height: 1.5;
+  min-height: 88rpx;
+  box-sizing: border-box;
+}
+
+.subject-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.subject-tag {
+  padding: 18rpx 36rpx;
+  border: 2rpx solid #e8e8e8;
+  border-radius: 40rpx;
+  font-size: 26rpx;
+  color: #666;
+  background: #f7f8fc;
+  font-weight: 500;
+  margin-right: 16rpx;
+  margin-bottom: 16rpx;
+  transition: all 0.3s ease;
+}
+
+.subject-tag.active {
+  border-color: #667eea;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+  color: #667eea;
+  font-weight: 700;
+}
+
+.btn-wrap {
+  padding: 20rpx 0;
+}
+
+.submit-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  border-radius: 16rpx;
+  padding: 28rpx 0;
+  font-size: 32rpx;
+  font-weight: 700;
+}

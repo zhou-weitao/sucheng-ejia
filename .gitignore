@@ -1,0 +1,38 @@
+# 依赖
+node_modules/
+.pnpm-store/
+
+# 构建产物
+dist/
+build/
+unpackage/
+*.min.js
+.wrangler/
+.vercel/
+.netlify/
+*.tsbuildinfo
+
+# 日志
+logs/
+*.log
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# 环境变量与密钥
+.env
+.env.*
+!.env.example
+
+# 微信开发者工具本地私有配置
+project.private.config.json
+
+# 编辑器 / 系统
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+
+# 测试覆盖率
+coverage/

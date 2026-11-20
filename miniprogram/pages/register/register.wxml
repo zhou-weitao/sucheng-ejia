@@ -1,0 +1,114 @@
+<view class="container">
+  <!-- 步骤1：角色选择 -->
+  <view class="card" wx:if="{{step === 1}}">
+    <text class="section-title">选择你的身份</text>
+    <view class="role-selector">
+      <view class="role-card {{role === 'tutor' ? 'role-active' : ''}}" bindtap="selectRole" data-role="tutor">
+        <text class="role-emoji">🎓</text>
+        <text class="role-name">我是家教</text>
+        <text class="role-desc">接单做家教</text>
+      </view>
+      <view class="role-card {{role === 'parent' ? 'role-active' : ''}}" bindtap="selectRole" data-role="parent">
+        <text class="role-emoji">👨‍👩‍👧</text>
+        <text class="role-name">我是家长</text>
+        <text class="role-desc">为孩子找家教</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 步骤2：家教资料填写 -->
+  <view class="card" wx:if="{{step === 2 && role === 'tutor'}}">
+    <text class="section-title">完善家教信息</text>
+
+    <view class="form-item">
+      <text class="form-label">真实姓名</text>
+      <input class="form-input" placeholder="请输入真实姓名" bindinput="onTutorInput" data-field="realName" value="{{tutorForm.realName}}" />
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">学历</text>
+      <picker bindchange="onEducationChange" range="{{educationOptions}}">
+        <view class="form-picker">{{tutorForm.education || '请选择学历'}}</view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">毕业院校</text>
+      <input class="form-input" placeholder="请输入学校名称" bindinput="onTutorInput" data-field="school" value="{{tutorForm.school}}" />
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">可教授年级</text>
+      <picker bindchange="onTutorGradeChange" range="{{tutorGradeOptions}}">
+        <view class="form-picker">{{tutorForm.grade || '请选择年级'}}</view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">可教授科目</text>
+      <view class="subject-list">
+        <view class="subject-tag {{item.selected ? 'active' : ''}}" wx:for="{{subjectList}}" wx:key="name" bindtap="toggleSubject" data-idx="{{index}}">
+          {{item.name}}
+        </view>
+      </view>
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">所在区域</text>
+      <picker bindchange="onDistrictChange" range="{{districtOptions}}">
+        <view class="form-picker">{{tutorForm.district || '请选择区域'}}</view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">教学经验</text>
+      <picker bindchange="onExperienceChange" range="{{experienceOptions}}">
+        <view class="form-picker">{{tutorForm.experience || '请选择教龄'}}</view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">期望时薪（元/小时）</text>
+      <picker bindchange="onRateChange" range="{{rateOptions}}">
+        <view class="form-picker">{{tutorForm.hourlyRate || '请选择时薪范围'}}</view>
+      </picker>
+    </view>
+  </view>
+
+  <!-- 步骤2：家长资料填写 -->
+  <view class="card" wx:if="{{step === 2 && role === 'parent'}}">
+    <text class="section-title">完善家长信息</text>
+
+    <view class="form-item">
+      <text class="form-label">称呼</text>
+      <input class="form-input" placeholder="如：王女士" bindinput="onParentInput" data-field="name" value="{{parentForm.name}}" />
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">联系电话</text>
+      <input class="form-input" type="number" placeholder="请输入手机号" bindinput="onParentInput" data-field="phone" value="{{parentForm.phone}}" maxlength="11" />
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">孩子年级</text>
+      <picker bindchange="onChildGradeChange" range="{{childGradeOptions}}">
+        <view class="form-picker">{{parentForm.childGrade || '请选择年级'}}</view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">所在区域</text>
+      <picker bindchange="onDistrictChange" range="{{districtOptions}}">
+        <view class="form-picker">{{parentForm.district || '请选择区域'}}</view>
+      </picker>
+    </view>
+  </view>
+
+  <!-- 按钮区域 -->
+  <view class="btn-wrap">
+    <button class="secondary-btn" bindtap="prevStep" wx:if="{{step === 2}}">上一步</button>
+    <button class="submit-btn" bindtap="nextStep" wx:if="{{step === 1 && role}}">下一步</button>
+    <button class="submit-btn" bindtap="onSubmit" wx:if="{{step === 2}}">完成注册</button>
+    <text class="skip-text" bindtap="skip" wx:if="{{step === 2}}">稍后完善，先逛逛 &gt;</text>
+  </view>
+</view>

@@ -1,0 +1,76 @@
+<view class="container">
+  <!-- 顶部信息 -->
+  <view class="header-card">
+    <view class="info-row">
+      <view class="avatar">{{item.name ? item.name[0] : (item.nickName ? item.nickName[0] : '?')}}</view>
+      <view class="info">
+        <view class="name-row">
+          <text class="name">{{item.name || item.nickName || '用户'}}</text>
+          <view class="cert-tag" wx:if="{{item.certified}}">已认证</view>
+        </view>
+        <view class="tags-row">
+          <text class="tag" wx:if="{{item.school}}">{{item.school}}</text>
+          <text class="tag" wx:if="{{item.grade}}">{{item.grade}}</text>
+          <text class="tag" wx:if="{{item.childGrade}}">{{item.childGrade}}</text>
+          <text class="tag" wx:if="{{item.district}}">📍{{item.district}}</text>
+        </view>
+        <view class="subjects-row" wx:if="{{item.subjects}}">
+          <text class="subject-tag" wx:for="{{item.subjects}}" wx:key="*this">{{item}}</text>
+        </view>
+      </view>
+      <view class="price-col">
+        <text class="price">¥{{item.expectedSalary || item.budget || 0}}</text>
+        <text class="price-unit">/小时</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 个人简介 -->
+  <view class="card" wx:if="{{item.intro || item.description}}">
+    <view class="card-title">个人简介</view>
+    <text class="intro-text">{{item.intro || item.description}}</text>
+  </view>
+
+  <!-- 信用评分 -->
+  <view class="card">
+    <view class="card-title">用户评价</view>
+    <view class="rating-row">
+      <view class="stars">
+        <text class="star" wx:for="{{5}}" wx:key="*this">{{index < Math.round(item.averageRating || 0) ? '⭐' : '☆'}}</text>
+      </view>
+      <text class="score">{{item.averageRating || 0}} 分</text>
+    </view>
+    <view class="reviews-btn" bindtap="goToReviews">
+      <text>查看全部评价 ({{reviewCount}})</text>
+      <text class="arrow">›</text>
+    </view>
+  </view>
+
+  <!-- 联系方式 - 会员解锁后显示 -->
+  <view class="card contact-card" wx:if="{{contactUnlocked}}">
+    <view class="card-title">联系方式</view>
+    <view class="contact-row">
+      <text class="contact-label">📱 手机</text>
+      <text class="contact-value">{{item.phone || '138****8888'}}</text>
+      <button class="copy-btn" size="mini" bindtap="onCopyPhone">复制</button>
+    </view>
+    <view class="contact-row">
+      <text class="contact-label">💬 微信</text>
+      <text class="contact-value">{{item.wechat || item._id || 'sucheng_jiajiao'}}</text>
+      <button class="copy-btn" size="mini" bindtap="onCopyWechat">复制</button>
+    </view>
+    <view class="contact-tip">
+      <text>联系时请说明来自「苏城e教」</text>
+    </view>
+  </view>
+
+  <!-- 底部按钮 -->
+  <view class="bottom-bar">
+    <button class="btn-primary" bindtap="onContact" wx:if="{{!contactUnlocked}}">
+      {{isMember ? '免费查看联系方式' : '解锁联系方式'}}
+    </button>
+    <button class="btn-success" wx:else>
+      ✓ 已解锁联系方式
+    </button>
+  </view>
+</view>

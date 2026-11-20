@@ -1,0 +1,155 @@
+<view class="container">
+  <!-- 家长发布需求 -->
+  <view wx:if="{{userRole === 'parent'}}">
+    <view class="header">
+      <text class="title">发布家教需求</text>
+      <text class="subtitle">填写信息，快速匹配合适的教员</text>
+    </view>
+
+    <view class="form-card">
+      <view class="form-item">
+        <text class="label">孩子年级 <text class="required">*</text></text>
+        <picker bindchange="onParentGradeChange" range="{{parentGradeOptions}}">
+          <view class="picker {{parentForm.grade ? 'selected' : ''}}">
+            {{parentForm.grade || '请选择年级'}}
+            <text class="arrow">▼</text>
+          </view>
+        </picker>
+      </view>
+
+      <view class="form-item">
+        <text class="label">所在区域 <text class="required">*</text></text>
+        <picker bindchange="onParentDistrictChange" range="{{districtOptions}}">
+          <view class="picker {{parentForm.district ? 'selected' : ''}}">
+            {{parentForm.district || '请选择区域'}}
+            <text class="arrow">▼</text>
+          </view>
+        </picker>
+      </view>
+
+      <view class="form-item">
+        <text class="label">辅导科目 <text class="required">*</text></text>
+        <view class="tags-wrap">
+          <view class="tag {{item.selected ? 'active' : ''}}" wx:for="{{subjectList}}" wx:key="name" bindtap="toggleParentSubject" data-idx="{{index}}">
+            {{item.name}}
+          </view>
+        </view>
+      </view>
+
+      <view class="form-item">
+        <text class="label">上课时间 <text class="required">*</text></text>
+        <picker bindchange="onParentTimeChange" range="{{timeOptions}}">
+          <view class="picker {{parentForm.time ? 'selected' : ''}}">
+            {{parentForm.time || '请选择时间'}}
+            <text class="arrow">▼</text>
+          </view>
+        </picker>
+      </view>
+
+      <view class="form-item">
+        <text class="label">预算范围 <text class="required">*</text></text>
+        <picker bindchange="onParentBudgetChange" range="{{budgetOptions}}">
+          <view class="picker {{parentForm.budget ? 'selected' : ''}}">
+            {{parentForm.budget || '请选择预算'}}
+            <text class="arrow">▼</text>
+          </view>
+        </picker>
+      </view>
+
+      <view class="form-item">
+        <text class="label">补充说明</text>
+        <textarea class="textarea" placeholder="例如：孩子基础薄弱，需要耐心的老师；周末上课优先等" bindinput="onParentDescInput" value="{{parentForm.description}}" maxlength="200" />
+      </view>
+    </view>
+  </view>
+
+  <!-- 老师发布简历 -->
+  <view wx:if="{{userRole === 'tutor'}}">
+    <view class="header">
+      <text class="title">发布家教简历</text>
+      <text class="subtitle">展示优势，获得更多曝光机会</text>
+    </view>
+
+    <view class="form-card">
+      <view class="form-item">
+        <text class="label">真实姓名 <text class="required">*</text></text>
+        <input class="input" placeholder="请输入真实姓名" bindinput="onTutorNameInput" value="{{tutorForm.realName}}" />
+      </view>
+
+      <view class="form-item">
+        <text class="label">所在区域 <text class="required">*</text></text>
+        <picker bindchange="onTutorDistrictChange" range="{{districtOptions}}">
+          <view class="picker {{tutorForm.district ? 'selected' : ''}}">
+            {{tutorForm.district || '请选择区域'}}
+            <text class="arrow">▼</text>
+          </view>
+        </picker>
+      </view>
+
+      <view class="form-item">
+        <text class="label">辅导科目 <text class="required">*</text></text>
+        <view class="tags-wrap">
+          <view class="tag {{item.selected ? 'active' : ''}}" wx:for="{{subjectList}}" wx:key="name" bindtap="toggleTutorSubject" data-idx="{{index}}">
+            {{item.name}}
+          </view>
+        </view>
+      </view>
+
+      <view class="form-item">
+        <text class="label">可教年级 <text class="required">*</text></text>
+        <picker bindchange="onTutorGradeChange" range="{{tutorGradeOptions}}">
+          <view class="picker {{tutorForm.grade ? 'selected' : ''}}">
+            {{tutorForm.grade || '请选择可教年级'}}
+            <text class="arrow">▼</text>
+          </view>
+        </picker>
+      </view>
+
+      <view class="form-item">
+        <text class="label">学历</text>
+        <picker bindchange="onTutorEducationChange" range="{{educationOptions}}">
+          <view class="picker {{tutorForm.education ? 'selected' : ''}}">
+            {{tutorForm.education || '请选择学历'}}
+            <text class="arrow">▼</text>
+          </view>
+        </picker>
+      </view>
+
+      <view class="form-item">
+        <text class="label">毕业院校</text>
+        <input class="input" placeholder="例如：苏州大学" bindinput="onTutorSchoolInput" value="{{tutorForm.school}}" />
+      </view>
+
+      <view class="form-item">
+        <text class="label">期望薪资 <text class="required">*</text></text>
+        <picker bindchange="onTutorRateChange" range="{{rateOptions}}">
+          <view class="picker {{tutorForm.hourlyRate ? 'selected' : ''}}">
+            {{tutorForm.hourlyRate ? tutorForm.hourlyRate + '元/小时' : '请选择期望薪资'}}
+            <text class="arrow">▼</text>
+          </view>
+        </picker>
+      </view>
+
+      <view class="form-item">
+        <text class="label">可上课时间</text>
+        <picker bindchange="onTutorExperienceChange" range="{{timeOptions}}">
+          <view class="picker {{tutorForm.experience ? 'selected' : ''}}">
+            {{tutorForm.experience || '请选择可上课时间'}}
+            <text class="arrow">▼</text>
+          </view>
+        </picker>
+      </view>
+
+      <view class="form-item">
+        <text class="label">自我介绍</text>
+        <textarea class="textarea" placeholder="简单介绍一下自己的家教经验和优势" bindinput="onTutorDescInput" value="{{tutorForm.description}}" maxlength="200" />
+      </view>
+    </view>
+  </view>
+
+  <view class="btn-wrap">
+    <button class="submit-btn" bindtap="onSubmit" disabled="{{submitting}}">
+      {{submitting ? '发布中...' : '立即发布'}}
+    </button>
+  </view>
+</view>

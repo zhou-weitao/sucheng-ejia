@@ -1,0 +1,17 @@
+{
+  "name": "tuge-ai",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "pnpm --filter web dev",
+    "dev:api": "pnpm --filter api dev",
+    "build": "pnpm --filter web build",
+    "deploy": "pnpm --filter api deploy && pnpm --filter web deploy"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.0"
+  }
+}

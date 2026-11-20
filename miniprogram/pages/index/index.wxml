@@ -1,0 +1,90 @@
+<view class="container">
+  <!-- 顶部搜索栏 -->
+  <view class="search-bar">
+    <view class="search-input-wrap">
+      <text class="search-icon">🔍</text>
+      <input class="search-input" placeholder="搜索科目、大学、区域" bindinput="onSearchInput" value="{{searchKeyword}}" confirm-type="search" />
+    </view>
+  </view>
+
+  <!-- 筛选区域 -->
+  <view class="filter-bar">
+    <view class="filter-item" bindtap="showFilterPopup" data-type="subject">
+      <text>{{filterSubject || '科目'}}</text>
+      <text class="arrow">▼</text>
+    </view>
+    <view class="filter-item" bindtap="showFilterPopup" data-type="grade">
+      <text>{{filterGrade || '年级'}}</text>
+      <text class="arrow">▼</text>
+    </view>
+    <view class="filter-item" bindtap="showFilterPopup" data-type="price">
+      <text>{{filterPrice || '价格'}}</text>
+      <text class="arrow">▼</text>
+    </view>
+    <view class="filter-item" bindtap="showFilterPopup" data-type="district">
+      <text>{{filterDistrict || '区域'}}</text>
+      <text class="arrow">▼</text>
+    </view>
+  </view>
+
+  <!-- 列表 -->
+  <view class="list-wrap">
+    <view class="list-item" wx:for="{{list}}" wx:key="_id" bindtap="goDetail" data-item="{{item}}">
+      <view class="item-left">
+        <view class="avatar">{{item.name ? item.name[0] : '?'}}</view>
+        <view class="match-badge" wx:if="{{item.isMatch}}">匹配</view>
+      </view>
+      <view class="item-middle">
+        <view class="item-top-row">
+          <text class="item-name">{{item.name || item.nickName}}</text>
+          <view class="item-tag" wx:if="{{item.certified}}">已认证</view>
+          <text class="match-score" wx:if="{{item.matchScore}}">匹配度 {{item.matchScore}}%</text>
+        </view>
+        <view class="item-info-row">
+          <text class="info-tag" wx:if="{{item.school}}">{{item.school}}</text>
+          <text class="info-tag" wx:if="{{item.subjects && item.subjects[0]}}">{{item.subjects[0]}}</text>
+          <text class="info-tag" wx:if="{{item.grade}}">{{item.grade}}</text>
+          <text class="info-tag" wx:if="{{item.childGrade}}">{{item.childGrade}}</text>
+        </view>
+        <view class="item-desc" wx:if="{{item.intro || item.description}}">
+          {{item.intro || item.description}}
+        </view>
+        <view class="item-bottom-row">
+          <text class="distance" wx:if="{{item.district}}">📍 {{item.district}}</text>
+          <view class="tutor-rating" wx:if="{{item.reviewCount >= 0}}">
+            <view class="rating-stars">
+              <text class="star" wx:for="{{5}}" wx:key="*this">{{index < Math.round(item.averageRating) ? '⭐' : '☆'}}</text>
+            </view>
+            <text class="rating-count">({{item.reviewCount}}条评价)</text>
+          </view>
+        </view>
+      </view>
+      <view class="item-right">
+        <text class="price">¥{{item.expectedSalary || item.budget || 0}}</text>
+        <text class="price-unit">/小时</text>
+      </view>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty" wx:if="{{list.length === 0}}">
+      <text class="empty-icon">📭</text>
+      <text class="empty-text">暂无匹配结果</text>
+    </view>
+  </view>
+
+  <!-- 筛选弹窗 -->
+  <view class="filter-popup" wx:if="{{showPopup}}" bindtap="hideFilterPopup">
+    <view class="popup-content" catchtap="stopPropagation">
+      <view class="popup-header">
+        <text class="popup-title">选择{{popupTitle}}</text>
+        <text class="close-btn" bindtap="hideFilterPopup">✕</text>
+      </view>
+      <view class="popup-list">
+        <view class="popup-item {{selectedValue === item ? 'active' : ''}}"
+              wx:for="{{popupOptions}}" wx:key="*this" bindtap="selectFilter" data-value="{{item}}">
+          {{item}}
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

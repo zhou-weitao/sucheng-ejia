@@ -1,0 +1,9 @@
+{
+  "name": "matchTutors",
+  "version": "1.0.0",
+  "description": "智能匹配家教算法",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

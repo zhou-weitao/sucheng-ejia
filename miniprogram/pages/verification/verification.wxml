@@ -1,0 +1,83 @@
+<view class="container">
+  <!-- 状态卡片 -->
+  <view class="status-card" wx:if="{{status !== null}}">
+    <view class="status-icon {{status === 1 ? 'success' : status === 2 ? 'error' : 'pending'}}">
+      {{status === 1 ? '✅' : status === 2 ? '❌' : '⏳'}}
+    </view>
+    <view class="status-info">
+      <text class="status-title">{{statusText}}</text>
+      <text class="status-desc" wx:if="{{status === 0}}">我们正在审核您的资料，请耐心等待</text>
+      <text class="status-desc" wx:if="{{status === 1}}">恭喜您已通过认证，享受更多权益</text>
+      <text class="status-desc reject" wx:if="{{status === 2}}">拒绝原因：{{rejectReason || '资料不符合要求'}}</text>
+    </view>
+    <button class="reapply-btn" wx:if="{{status === 2}}" bindtap="reapply">重新申请</button>
+  </view>
+
+  <!-- 认证类型选择 -->
+  <view class="section">
+    <text class="section-title">选择认证类型</text>
+    <view class="type-grid">
+      <view class="type-card {{selectedType === item.key ? 'selected' : ''}} {{status === 0 ? 'disabled' : ''}}" wx:for="{{typeList}}" wx:key="key" data-type="{{item.key}}" bindtap="selectType">
+        <text class="type-icon">{{item.icon}}</text>
+        <text class="type-name">{{item.name}}</text>
+        <text class="type-desc">{{item.desc}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 表单区域 -->
+  <view class="section" wx:if="{{status !== 1}}">
+    <text class="section-title">填写认证信息</text>
+    <view class="form-card">
+      <view class="form-item">
+        <text class="label">真实姓名</text>
+        <input class="input" placeholder="请输入身份证上的真实姓名" value="{{formData.realName}}" bindinput="onNameInput" disabled="{{status === 0}}" />
+      </view>
+      <view class="form-item">
+        <text class="label">证件号码</text>
+        <input class="input" placeholder="请输入证件号码" value="{{formData.idNumber}}" bindinput="onIdNumberInput" disabled="{{status === 0}}" />
+      </view>
+    </view>
+  </view>
+
+  <!-- 图片上传区域 -->
+  <view class="section" wx:if="{{status !== 1}}">
+    <text class="section-title">上传证件照片</text>
+    <view class="upload-card">
+      <text class="upload-tip">请上传清晰的证件照片（最多3张）</text>
+      <view class="image-list">
+        <view class="image-item" wx:for="{{formData.imageUrls}}" wx:key="index" wx:if="{{formData.imageUrls.length > 0}}">
+          <image class="image" src="{{item}}" mode="aspectFill" bindtap="previewImage" data-index="{{index}}" />
+          <view class="remove-btn" bindtap="removeImage" data-index="{{index}}" wx:if="{{status !== 0}}">×</view>
+        </view>
+        <view class="upload-btn" bindtap="chooseImage" wx:if="{{formData.imageUrls.length < 3 && status !== 0}}">
+          <text class="plus">+</text>
+          <text class="upload-text">添加图片</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 提交按钮 -->
+  <view class="submit-wrap" wx:if="{{status === null || status === 2}}">
+    <button class="submit-btn" bindtap="submitForm" disabled="{{submitting || uploading}}" loading="{{submitting}}">
+      {{uploading ? '上传中...' : submitting ? '提交中...' : '提交认证'}}
+    </button>
+  </view>
+
+  <!-- 历史记录 -->
+  <view class="section" wx:if="{{historyList.length > 0}}">
+    <text class="section-title">认证记录</text>
+    <view class="history-card">
+      <view class="history-item" wx:for="{{historyList}}" wx:key="_id">
+        <view class="history-left">
+          <text class="history-type">{{item.type === 'student' ? '学生证' : item.type === 'teacherQual' ? '教师资格证' : '身份证'}}认证</text>
+          <text class="history-time">{{item.formattedTime}}</text>
+        </view>
+        <view class="history-status {{item.status === 1 ? 'success' : item.status === 2 ? 'reject' : 'pending'}}">
+          {{item.statusText}}
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

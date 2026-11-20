@@ -1,0 +1,310 @@
+/* ============================================
+   认证中心页面 - Design Tokens v1.0
+   ============================================ */
+
+.container {
+  padding: var(--space-md);
+  background: var(--bg-primary);
+  min-height: 100vh;
+}
+
+/* 🎯 状态卡片 - 玻璃拟态风格 */
+.status-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl);
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--space-md);
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s ease;
+}
+
+.status-icon {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48rpx;
+  margin-right: var(--space-md);
+  flex-shrink: 0;
+}
+
+.status-icon.pending {
+  background: var(--color-warning-bg);
+}
+
+.status-icon.success {
+  background: var(--color-success-bg);
+}
+
+.status-icon.error {
+  background: var(--color-error-bg);
+}
+
+.status-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+}
+
+.status-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--color-gray-900);
+  line-height: 1.4;
+}
+
+.status-desc {
+  font-size: 24rpx;
+  color: var(--color-gray-500);
+  line-height: 1.5;
+}
+
+.status-desc.reject {
+  color: var(--color-error);
+}
+
+.reapply-btn {
+  background: var(--color-gradient);
+  color: var(--color-white);
+  font-size: 24rpx;
+  padding: 12rpx 28rpx;
+  border-radius: var(--radius-full);
+  line-height: 1.2;
+  font-weight: 500;
+  box-shadow: var(--shadow-primary);
+  transition: all 0.2s ease;
+}
+
+.reapply-btn:active {
+  transform: translateY(2rpx);
+}
+
+/* 📋 表单区域 */
+.section {
+  margin-bottom: var(--space-md);
+}
+
+/* 类型选择 - 3列网格 */
+.type-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16rpx;
+}
+
+.type-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 28rpx 16rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2rpx solid transparent;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.type-card.selected {
+  border-color: var(--color-primary);
+  background: rgba(102, 126, 234, 0.05);
+  box-shadow: 0 4rpx 20rpx rgba(102, 126, 234, 0.15);
+  transform: translateY(-4rpx);
+}
+
+.type-card.disabled {
+  opacity: 0.5;
+}
+
+.type-icon {
+  font-size: 52rpx;
+  margin-bottom: 12rpx;
+}
+
+.type-name {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: var(--color-gray-900);
+  margin-bottom: 6rpx;
+}
+
+.type-desc {
+  font-size: 20rpx;
+  color: var(--color-gray-500);
+}
+
+/* 表单卡片 */
+.form-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.form-item {
+  padding: 32rpx;
+  border-bottom: 1rpx solid var(--color-gray-300);
+  display: flex;
+  align-items: center;
+}
+
+.form-item:last-child {
+  border-bottom: none;
+}
+
+.label {
+  width: 160rpx;
+  font-size: 28rpx;
+  color: var(--color-gray-700);
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.input {
+  flex: 1;
+  font-size: 28rpx;
+  color: var(--color-gray-900);
+}
+
+.input[disabled] {
+  color: var(--color-gray-500);
+}
+
+/* 上传卡片 */
+.upload-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.upload-tip {
+  display: block;
+  font-size: 24rpx;
+  color: var(--color-gray-500);
+  margin-bottom: 24rpx;
+  line-height: 1.5;
+}
+
+.image-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+
+.image-item {
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: var(--radius-md);
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+}
+
+.remove-btn {
+  position: absolute;
+  top: 8rpx;
+  right: 8rpx;
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  color: var(--color-white);
+  font-size: 32rpx;
+  line-height: 38rpx;
+  text-align: center;
+  backdrop-filter: blur(4px);
+}
+
+.upload-btn {
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: var(--radius-md);
+  border: 2rpx dashed var(--color-gray-300);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-gray-100);
+  transition: all 0.2s ease;
+}
+
+.upload-btn:active {
+  border-color: var(--color-primary);
+  background: rgba(102, 126, 234, 0.05);
+}
+
+.plus {
+  font-size: 56rpx;
+  color: var(--color-gray-500);
+  line-height: 1;
+  font-weight: 300;
+}
+
+.upload-text {
+  font-size: 22rpx;
+  color: var(--color-gray-500);
+  margin-top: 8rpx;
+}
+
+/* 提交按钮 */
+.submit-wrap {
+  padding: 40rpx 0 80rpx;
+}
+
+/* 历史记录 */
+.history-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.history-item {
+  padding: 28rpx 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1rpx solid var(--color-gray-300);
+  transition: background 0.2s ease;
+}
+
+.history-item:last-child {
+  border-bottom: none;
+}
+
+.history-item:active {
+  background: var(--color-gray-100);
+}
+
+.history-left {
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+}
+
+.history-type {
+  font-size: 28rpx;
+  color: var(--color-gray-900);
+  font-weight: 500;
+}
+
+.history-time {
+  font-size: 22rpx;
+  color: var(--color-gray-500);
+}
+
+.history-status {
+  font-size: 24rpx;
+  padding: 8rpx 20rpx;
+  border-radius: var(--radius-full);
+  font-weight: 500;
+}
